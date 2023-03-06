@@ -244,6 +244,14 @@ public class bataille_multijoueur {
         System.out.println("1=host 2=join");
         Scanner scanner = new Scanner(System.in);
         String rep = scanner.nextLine();
+        if(rep=="")
+        {
+            cls();
+            System.out.print("\u001b[01;" + rouge  +"m"+ "repondez"+ "\u001b[00m ");
+            attendre(2);
+            cls();
+            connexion();
+        }
         int int_rep=Integer.parseInt(rep);
         if(int_rep==1)
         {
@@ -291,6 +299,11 @@ public class bataille_multijoueur {
             flux_sortant = new PrintWriter(autre_joueur.getOutputStream(), true);
             engagement();
         }
+        cls();
+        System.out.print("\u001b[01;" + rouge  +"m"+ "entrez les propositions"+ "\u001b[00m ");
+        attendre(2);
+        cls();
+        connexion();
     }
 
     /** Initialise la grille du joueur en lui demandant ou il veut placer ses bateaux
@@ -1014,6 +1027,13 @@ public class bataille_multijoueur {
      * @since 05/03/2023
      */
     public static void main(String[] args) throws IOException {
-        connexion();
+        try
+        {
+            connexion();
+        }
+        catch (IOException e)
+        {
+            System.out.println("\u001b[01;" + rouge  +"m"+ "Il s'est deconnecte"+ "\u001b[00m");
+        }
     }
 }
